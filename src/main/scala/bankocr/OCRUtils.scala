@@ -16,7 +16,7 @@ object OCRUtils {
       case '7' => SEVEN
       case '8' => EIGHT
       case '9' => NINE
-      case _ => throw new Error("unrecognized or unimplemented digit")
+      case _ => throw new InvalidDigitException("unrecognized digit")
     }
   }
 

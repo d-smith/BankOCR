@@ -27,10 +27,18 @@ case class ScannedLine(lines: List[String]) {
     toScannedDigitsR(lines(0), lines(1), lines(2), List[ScannedDigit]())
   }
 
-  def toDigitString : String = {
+  override def toString : String = {
     require(lines.foldLeft(true)((b,s) => s.length == 27), "each line must be 27 characters long")
     val scannedDigits = toScannedDigits
     scannedDigits.foldLeft("")((acc, d)=> acc + d.asString)
+  }
+
+  override def equals(digits: Any): Boolean = {
+    digits match {
+      case d:String => toString.equals(d)
+      case sl:ScannedLine => toString.equals(sl.toString)
+      case _ => false
+    }
   }
 }
 

@@ -34,7 +34,7 @@ class ScannedDigit(lines: List[String])  {
       case sd:ScannedDigit if(sd.hashCode == ScannedDigit.SEVEN.hashCode) => "7"
       case sd:ScannedDigit if(sd.hashCode == ScannedDigit.EIGHT.hashCode) => "8"
       case sd:ScannedDigit if(sd.hashCode == ScannedDigit.NINE.hashCode) => "9"
-      case _ => throw new Error("Not a ScannedDigit")
+      case _ => throw new InvalidDigitException("Not a ScannedDigit")
     }
   }
 
