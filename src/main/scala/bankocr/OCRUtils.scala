@@ -2,7 +2,7 @@ package bankocr
 
 
 object OCRUtils {
-  import ScannedDigit.{ZERO,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE}
+  import ScannedDigit.{ZERO,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,ILL}
 
   def digit2ScannedDigit(digit: Char) : ScannedDigit = {
     digit match {
@@ -16,7 +16,7 @@ object OCRUtils {
       case '7' => SEVEN
       case '8' => EIGHT
       case '9' => NINE
-      case _ => throw new InvalidDigitException("unrecognized digit")
+      case _ => ILL
     }
   }
 

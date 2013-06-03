@@ -34,7 +34,7 @@ class ScannedDigit(lines: List[String])  {
       case sd:ScannedDigit if(sd.hashCode == ScannedDigit.SEVEN.hashCode) => "7"
       case sd:ScannedDigit if(sd.hashCode == ScannedDigit.EIGHT.hashCode) => "8"
       case sd:ScannedDigit if(sd.hashCode == ScannedDigit.NINE.hashCode) => "9"
-      case _ => throw new InvalidDigitException("Not a ScannedDigit")
+      case _ => "?"
     }
   }
 
@@ -85,6 +85,8 @@ object ScannedDigit {
   val nineLine2 = "|_|"
   val nineLine3 = " _|"
 
+
+
   val ZERO = new ScannedDigit(List(zeroLine1, zeroLine2, zeroLine3))
   val ONE = new ScannedDigit(List(oneLine1, oneLine2, oneLine3))
   val TWO = new ScannedDigit(List(twoLine1, twoLine2, twoLine3))
@@ -95,6 +97,7 @@ object ScannedDigit {
   val SEVEN = new ScannedDigit(List(sevenLine1, sevenLine2, sevenLine3))
   val EIGHT = new ScannedDigit(List(eightLine1, eightLine2, eightLine3))
   val NINE = new ScannedDigit(List(nineLine1, nineLine2, nineLine3))
+  val ILL = new ScannedDigit(List("xxx","xxx","xxx"))
 
 
 }

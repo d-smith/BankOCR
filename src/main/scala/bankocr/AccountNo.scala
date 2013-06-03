@@ -5,7 +5,14 @@ class AccountNo private (scannedLine: ScannedLine) {
   require(scannedLine.toString.length == 9, "Valid account numbers must have 9 digits")
 
   override def toString() : String = {
-    scannedLine.toString
+    val base = scannedLine.toString
+    if(base.contains("?")) {
+      base + " ILL"
+    } else if(!isValid) {
+      base + " ERR"
+    } else {
+      base
+    }
   }
 
   override def equals(accountNo: Any): Boolean = {

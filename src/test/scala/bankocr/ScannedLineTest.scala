@@ -35,9 +35,7 @@ class ScannedLineTest extends FunSuite {
   }
 
   test("invalid digits yield an exceptions") {
-    intercept[InvalidDigitException] {
-      scannedLineFromDigitString("1223334444X")
-    }
+      scannedLineFromDigitString("12233344X")
   }
 
 }
