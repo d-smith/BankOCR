@@ -13,6 +13,7 @@ case class ScannedLine(lines: List[String]) {
   }
 
   def toScannedDigits() : List[ScannedDigit] = {
+
    def toScannedDigitsR(l1: String, l2: String, l3: String, digits: List[ScannedDigit]) : List[ScannedDigit] = {
       if(l1.length == 0) digits
       else {

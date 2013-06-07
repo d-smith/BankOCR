@@ -32,8 +32,8 @@ class AccountNoTest extends FunSuite {
   }
 
   test("invalid account numbers indicate this when printed") {
-    val accountNo = AccountNo("111111111")
-    assert(accountNo.toString === "111111111 ERR")
+    val accountNo = AccountNo("100000005")
+    assert(accountNo.toString === "100000005 ERR")
   }
 
   test("an account number with illegible characters substitutes ? characters for the illegible chars") {
@@ -42,9 +42,44 @@ class AccountNoTest extends FunSuite {
   }
 
   test("an account number wil illegible characters indicates this when printed") {
-    val accountNo = AccountNo("987xx4321")
-    assert(accountNo === "987??4321")
-    assert(accountNo.toString === "987??4321 ILL")
+    val accountNo = AccountNo("xxxxxxx07")
+    assert(accountNo === "???????07")
+    assert(accountNo.toString === "???????07 ILL")
+  }
+
+  test("We can generate legible account numbers from illegible lines") {
+    val scannedLines = List(
+    "    _  _  _  _  _  _     _ ",
+    "|_||_|| || ||_   |  |  | _ ",
+    "  | _||_||_||_|  |  |  | _|")
+
+    val accountNo = AccountNo(new ScannedLine(scannedLines))
+    val legible = accountNo.genLegible
+    assert(legible.size === 2)
+    assert(legible.contains(AccountNo("490067713")) === true)
+    assert(legible.contains(AccountNo("490067715")) === true)
+  }
+
+  test("We can generate valid account nos from an illegible line") {
+    val scannedLines = List(
+    "    _  _  _  _  _  _     _ ",
+    "|_||_|| ||_||_   |  |  | _ ",
+    "  | _||_||_||_|  |  |  | _|")
+
+    val accountNo = AccountNo(new ScannedLine(scannedLines))
+    val alternatives = accountNo.genLegible.filter((an)=>an.isValid)
+    assert(alternatives.size === 1)
+    assert(alternatives.contains(AccountNo("490867715")) === true)
+
+  }
+
+  test("888888888 is invalid and there are three possible alternatives") {
+    val accountNo = AccountNo("888888888")
+    val alternatives = accountNo.genAlternatives
+    assert(alternatives.size === 3)
+    assert(alternatives.contains(AccountNo("888886888")) === true)
+    assert(alternatives.contains(AccountNo("888888880")) === true)
+    assert(alternatives.contains(AccountNo("888888988")) === true)
   }
 
 }
